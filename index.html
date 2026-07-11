@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soiree Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="string-lights" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="eyebrow">Three-night summer soiree</p>
+        <h1 id="page-title">Dusk Garden Weekender</h1>
+        <p class="hero-copy">
+          Guest plans, golden-hour timing, and one signature drink for each
+          warm night under the lights.
+        </p>
+      </section>
+
+      <section class="countdown-panel" aria-labelledby="countdown-title">
+        <div>
+          <p class="eyebrow">Opening night</p>
+          <h2 id="countdown-title">Golden hour countdown</h2>
+        </div>
+        <div class="countdown" aria-live="polite">
+          <div>
+            <strong id="days">0</strong>
+            <span>Days</span>
+          </div>
+          <div>
+            <strong id="hours">0</strong>
+            <span>Hours</span>
+          </div>
+          <div>
+            <strong id="minutes">0</strong>
+            <span>Minutes</span>
+          </div>
+          <div>
+            <strong id="seconds">0</strong>
+            <span>Seconds</span>
+          </div>
+        </div>
+        <p class="countdown-note" id="countdown-note"></p>
+      </section>
+
+      <div class="planner-grid">
+        <section class="panel" aria-labelledby="guest-title">
+          <div class="section-heading">
+            <p class="eyebrow">Guest list</p>
+            <h2 id="guest-title">RSVPs</h2>
+          </div>
+          <div class="guest-list" id="guest-list"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="drink-title">
+          <div class="section-heading">
+            <p class="eyebrow">Signature drinks</p>
+            <h2 id="drink-title">Nightly menu</h2>
+          </div>
+          <div class="drink-menu" id="drink-menu"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
