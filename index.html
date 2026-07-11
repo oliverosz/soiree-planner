@@ -57,6 +57,38 @@
             <p class="eyebrow">Guest list</p>
             <h2 id="guest-title">RSVPs</h2>
           </div>
+
+          <form class="rsvp-form" id="rsvp-form">
+            <label>
+              <span>Name</span>
+              <input id="guest-name" name="guest-name" type="text" required />
+            </label>
+
+            <fieldset>
+              <legend>Response</legend>
+              <label class="radio-option">
+                <input type="radio" name="rsvp-status" value="Attending" checked />
+                <span>Attending</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="rsvp-status" value="Regrets" />
+                <span>Regrets</span>
+              </label>
+            </fieldset>
+
+            <label>
+              <span>Plus-one</span>
+              <input
+                id="plus-one"
+                name="plus-one"
+                type="text"
+                placeholder="Optional"
+              />
+            </label>
+
+            <button type="submit">Add RSVP</button>
+          </form>
+
           <div class="guest-list" id="guest-list"></div>
         </section>
 

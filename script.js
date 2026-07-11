@@ -1,10 +1,10 @@
 const guests = [
-  { name: "Mara Voss", status: "Confirmed", plusOne: "Leo" },
-  { name: "Julian Price", status: "Confirmed", plusOne: "None" },
+  { name: "Mara Voss", status: "Attending", plusOne: "Leo" },
+  { name: "Julian Price", status: "Attending", plusOne: "None" },
   { name: "Nina Bell", status: "Pending", plusOne: "Maybe" },
-  { name: "Theo Hart", status: "Confirmed", plusOne: "Sam" },
-  { name: "Iris Lane", status: "Declined", plusOne: "None" },
-  { name: "Camille Stone", status: "Confirmed", plusOne: "Ari" },
+  { name: "Theo Hart", status: "Attending", plusOne: "Sam" },
+  { name: "Iris Lane", status: "Regrets", plusOne: "None" },
+  { name: "Camille Stone", status: "Attending", plusOne: "Ari" },
 ];
 
 const drinks = [
@@ -65,6 +65,25 @@ function renderDrinks() {
     .join("");
 }
 
+function addRsvp(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const name = form.elements["guest-name"].value.trim();
+  const status = form.elements["rsvp-status"].value;
+  const plusOne = form.elements["plus-one"].value.trim() || "None";
+
+  if (!name) {
+    return;
+  }
+
+  guests.unshift({ name, status, plusOne });
+  renderGuests();
+  form.reset();
+  form.elements["rsvp-status"][0].checked = true;
+  form.elements["guest-name"].focus();
+}
+
 function updateCountdown() {
   const now = new Date();
   const remaining = Math.max(openingGoldenHour - now, 0);
@@ -84,6 +103,7 @@ function updateCountdown() {
       : "Golden hour has arrived. Time to light the candles.";
 }
 
+document.querySelector("#rsvp-form").addEventListener("submit", addRsvp);
 renderGuests();
 renderDrinks();
 updateCountdown();

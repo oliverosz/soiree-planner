@@ -200,6 +200,92 @@ h2 {
   margin-bottom: 18px;
 }
 
+.rsvp-form {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(190px, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid rgba(255, 245, 223, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 245, 223, 0.08);
+}
+
+.rsvp-form label,
+.rsvp-form fieldset {
+  margin: 0;
+}
+
+.rsvp-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.rsvp-form span,
+.rsvp-form legend {
+  color: rgba(255, 245, 223, 0.74);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.rsvp-form fieldset {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  padding: 0;
+  border: 0;
+}
+
+.rsvp-form legend {
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.radio-option {
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
+.radio-option input {
+  accent-color: var(--peach);
+}
+
+.rsvp-form input[type="text"] {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(255, 245, 223, 0.2);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--cream);
+  background: rgba(36, 20, 39, 0.58);
+  font: inherit;
+}
+
+.rsvp-form input[type="text"]::placeholder {
+  color: rgba(255, 245, 223, 0.46);
+}
+
+.rsvp-form input[type="text"]:focus {
+  outline: 2px solid rgba(255, 211, 155, 0.78);
+  outline-offset: 2px;
+}
+
+.rsvp-form button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 16px;
+  color: #2b1824;
+  background: var(--peach);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rsvp-form button:hover {
+  background: #ffe0ad;
+}
+
 .guest-list,
 .drink-menu {
   display: grid;
@@ -237,7 +323,8 @@ h2 {
   text-align: center;
 }
 
-.status.confirmed {
+.status.confirmed,
+.status.attending {
   background: var(--mint);
 }
 
@@ -245,7 +332,8 @@ h2 {
   background: var(--peach);
 }
 
-.status.declined {
+.status.declined,
+.status.regrets {
   color: var(--cream);
   background: var(--rose);
 }
@@ -274,6 +362,7 @@ h2 {
 
   .countdown-panel,
   .planner-grid,
+  .rsvp-form,
   .guest-card {
     grid-template-columns: 1fr;
   }
