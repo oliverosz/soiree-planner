@@ -1,0 +1,6 @@
+Add a guest cap and waitlist to the Soirée Planner.
+
+The venue's fire code caps attendance at 120 guests. When the
+confirmed guest list (including plus-ones) reaches 120, new RSVPs go
+to a waitlist instead. Show a "spots remaining" count, and show
+waitlisted guests in their own section in order of signup.
