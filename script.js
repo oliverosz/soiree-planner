@@ -1,3 +1,5 @@
+const GUEST_CAP = 120;
+
 const guests = [
   { name: "Mara Voss", status: "Attending", plusOne: "Leo" },
   { name: "Julian Price", status: "Attending", plusOne: "None" },
@@ -6,6 +8,8 @@ const guests = [
   { name: "Iris Lane", status: "Regrets", plusOne: "None" },
   { name: "Camille Stone", status: "Attending", plusOne: "Ari" },
 ];
+
+const waitlist = [];
 
 const drinks = [
   {
@@ -31,22 +35,46 @@ function statusClass(status) {
   return status.toLowerCase();
 }
 
+function partySize(guest) {
+  return guest.status === "Attending" && guest.plusOne !== "None" ? 2 : 1;
+}
+
+function confirmedGuestCount() {
+  return guests
+    .filter((guest) => guest.status === "Attending")
+    .reduce((total, guest) => total + partySize(guest), 0);
+}
+
+function spotsRemaining() {
+  return Math.max(GUEST_CAP - confirmedGuestCount(), 0);
+}
+
+function renderCapacity() {
+  document.querySelector("#spots-remaining").textContent = spotsRemaining();
+  document.querySelector("#guest-cap").textContent = GUEST_CAP;
+}
+
+function guestCard(guest) {
+  return `
+    <article class="guest-card">
+      <div>
+        <p class="guest-name">${guest.name}</p>
+        <p class="guest-plus-one">Plus-one: ${guest.plusOne}</p>
+      </div>
+      <span class="status ${statusClass(guest.status)}">${guest.status}</span>
+    </article>
+  `;
+}
+
 function renderGuests() {
   const guestList = document.querySelector("#guest-list");
+  const waitlistSection = document.querySelector("#waitlist-section");
+  const waitlistList = document.querySelector("#waitlist-list");
 
-  guestList.innerHTML = guests
-    .map(
-      (guest) => `
-        <article class="guest-card">
-          <div>
-            <p class="guest-name">${guest.name}</p>
-            <p class="guest-plus-one">Plus-one: ${guest.plusOne}</p>
-          </div>
-          <span class="status ${statusClass(guest.status)}">${guest.status}</span>
-        </article>
-      `,
-    )
-    .join("");
+  guestList.innerHTML = guests.map(guestCard).join("");
+  waitlistList.innerHTML = waitlist.map(guestCard).join("");
+  waitlistSection.hidden = waitlist.length === 0;
+  renderCapacity();
 }
 
 function renderDrinks() {
@@ -77,7 +105,14 @@ function addRsvp(event) {
     return;
   }
 
-  guests.unshift({ name, status, plusOne });
+  const guest = { name, status, plusOne };
+
+  if (status === "Attending" && partySize(guest) > spotsRemaining()) {
+    waitlist.push({ ...guest, status: "Waitlisted" });
+  } else {
+    guests.unshift(guest);
+  }
+
   renderGuests();
   form.reset();
   form.elements["rsvp-status"][0].checked = true;

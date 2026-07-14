@@ -110,6 +110,7 @@ body::before {
 
 h1,
 h2,
+h3,
 p {
   margin-top: 0;
 }
@@ -126,6 +127,11 @@ h2 {
   margin-bottom: 0;
   font-size: clamp(1.45rem, 3vw, 2rem);
   letter-spacing: 0;
+}
+
+h3 {
+  margin-bottom: 0;
+  font-size: 1.15rem;
 }
 
 .hero-copy {
@@ -198,6 +204,33 @@ h2 {
 
 .section-heading {
   margin-bottom: 18px;
+}
+
+.capacity-meter {
+  display: flex;
+  gap: 10px 18px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 245, 223, 0.14);
+  border-radius: 8px;
+  background: rgba(152, 199, 168, 0.14);
+}
+
+.capacity-meter span {
+  color: var(--cream);
+  font-weight: 900;
+}
+
+.capacity-meter strong {
+  color: var(--peach);
+  font-size: 1.45rem;
+}
+
+.capacity-meter small {
+  color: rgba(255, 245, 223, 0.68);
+  font-weight: 800;
 }
 
 .rsvp-form {
@@ -292,6 +325,12 @@ h2 {
   gap: 12px;
 }
 
+.waitlist-section {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 245, 223, 0.14);
+}
+
 .guest-card {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -332,6 +371,11 @@ h2 {
   background: var(--peach);
 }
 
+.status.waitlisted {
+  color: var(--cream);
+  background: var(--fig);
+}
+
 .status.declined,
 .status.regrets {
   color: var(--cream);
@@ -363,8 +407,13 @@ h2 {
   .countdown-panel,
   .planner-grid,
   .rsvp-form,
+  .capacity-meter,
   .guest-card {
     grid-template-columns: 1fr;
+  }
+
+  .capacity-meter {
+    align-items: start;
   }
 
   .countdown {

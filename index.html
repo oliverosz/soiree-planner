@@ -57,6 +57,13 @@
             <p class="eyebrow">Guest list</p>
             <h2 id="guest-title">RSVPs</h2>
           </div>
+          <div class="capacity-meter" aria-live="polite">
+            <span>
+              <strong id="spots-remaining">0</strong>
+              spots remaining
+            </span>
+            <small>Fire code cap: <span id="guest-cap">120</span> guests</small>
+          </div>
 
           <form class="rsvp-form" id="rsvp-form">
             <label>
@@ -90,6 +97,14 @@
           </form>
 
           <div class="guest-list" id="guest-list"></div>
+
+          <section class="waitlist-section" id="waitlist-section" hidden>
+            <div class="section-heading">
+              <p class="eyebrow">Waitlist</p>
+              <h3>In signup order</h3>
+            </div>
+            <div class="guest-list" id="waitlist-list"></div>
+          </section>
         </section>
 
         <section class="panel" aria-labelledby="drink-title">
