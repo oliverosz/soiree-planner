@@ -283,7 +283,8 @@ h3 {
   accent-color: var(--peach);
 }
 
-.rsvp-form input[type="text"] {
+.rsvp-form input[type="text"],
+.rsvp-form select {
   width: 100%;
   min-height: 42px;
   border: 1px solid rgba(255, 245, 223, 0.2);
@@ -294,11 +295,16 @@ h3 {
   font: inherit;
 }
 
+.rsvp-form select {
+  color-scheme: dark;
+}
+
 .rsvp-form input[type="text"]::placeholder {
   color: rgba(255, 245, 223, 0.46);
 }
 
-.rsvp-form input[type="text"]:focus {
+.rsvp-form input[type="text"]:focus,
+.rsvp-form select:focus {
   outline: 2px solid rgba(255, 211, 155, 0.78);
   outline-offset: 2px;
 }
@@ -317,6 +323,41 @@ h3 {
 
 .rsvp-form button:hover {
   background: #ffe0ad;
+}
+
+.diet-summary {
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid rgba(255, 245, 223, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 245, 223, 0.08);
+}
+
+.diet-summary .section-heading {
+  margin-bottom: 12px;
+}
+
+.diet-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.diet-summary-item {
+  display: flex;
+  min-height: 44px;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 245, 223, 0.12);
+  border-radius: 8px;
+  background: rgba(36, 20, 39, 0.36);
+}
+
+.diet-summary-item strong {
+  color: var(--cream);
+  font-size: 1.2rem;
 }
 
 .guest-list,
@@ -360,6 +401,40 @@ h3 {
   font-size: 0.78rem;
   font-weight: 900;
   text-align: center;
+}
+
+.guest-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: end;
+}
+
+.diet-badge {
+  align-self: start;
+  min-width: 108px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #241427;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.diet-none {
+  background: rgba(255, 245, 223, 0.76);
+}
+
+.diet-vegetarian {
+  background: #9bd28f;
+}
+
+.diet-vegan {
+  background: #62c7a0;
+}
+
+.diet-gluten-free {
+  background: #f7b267;
 }
 
 .status.confirmed,
@@ -408,7 +483,8 @@ h3 {
   .planner-grid,
   .rsvp-form,
   .capacity-meter,
-  .guest-card {
+  .guest-card,
+  .diet-summary-grid {
     grid-template-columns: 1fr;
   }
 
@@ -422,5 +498,9 @@ h3 {
 
   .status {
     width: fit-content;
+  }
+
+  .guest-badges {
+    justify-content: start;
   }
 }

@@ -1,12 +1,19 @@
 const GUEST_CAP = 120;
 
+const DIET_OPTIONS = [
+  { value: "none", label: "None" },
+  { value: "vegetarian", label: "Vegetarian" },
+  { value: "vegan", label: "Vegan" },
+  { value: "gluten-free", label: "Gluten-free" },
+];
+
 const guests = [
-  { name: "Mara Voss", status: "Attending", plusOne: "Leo" },
-  { name: "Julian Price", status: "Attending", plusOne: "None" },
-  { name: "Nina Bell", status: "Pending", plusOne: "Maybe" },
-  { name: "Theo Hart", status: "Attending", plusOne: "Sam" },
-  { name: "Iris Lane", status: "Regrets", plusOne: "None" },
-  { name: "Camille Stone", status: "Attending", plusOne: "Ari" },
+  { name: "Mara Voss", status: "Attending", plusOne: "Leo", diet: "vegetarian" },
+  { name: "Julian Price", status: "Attending", plusOne: "None", diet: "none" },
+  { name: "Nina Bell", status: "Pending", plusOne: "Maybe", diet: "gluten-free" },
+  { name: "Theo Hart", status: "Attending", plusOne: "Sam", diet: "none" },
+  { name: "Iris Lane", status: "Regrets", plusOne: "None", diet: "vegan" },
+  { name: "Camille Stone", status: "Attending", plusOne: "Ari", diet: "gluten-free" },
 ];
 
 const waitlist = [];
@@ -35,6 +42,10 @@ function statusClass(status) {
   return status.toLowerCase();
 }
 
+function dietLabel(diet) {
+  return DIET_OPTIONS.find((option) => option.value === diet)?.label ?? "None";
+}
+
 function partySize(guest) {
   return guest.status === "Attending" && guest.plusOne !== "None" ? 2 : 1;
 }
@@ -54,6 +65,29 @@ function renderCapacity() {
   document.querySelector("#guest-cap").textContent = GUEST_CAP;
 }
 
+function renderDietSummary() {
+  const dietSummary = document.querySelector("#diet-summary");
+  const counts = DIET_OPTIONS.reduce((totals, option) => {
+    totals[option.value] = 0;
+    return totals;
+  }, {});
+
+  guests
+    .filter((guest) => guest.status === "Attending")
+    .forEach((guest) => {
+      counts[guest.diet] += 1;
+    });
+
+  dietSummary.innerHTML = DIET_OPTIONS.map(
+    (option) => `
+      <div class="diet-summary-item">
+        <span class="diet-badge diet-${option.value}">${option.label}</span>
+        <strong>${counts[option.value]}</strong>
+      </div>
+    `,
+  ).join("");
+}
+
 function guestCard(guest) {
   return `
     <article class="guest-card">
@@ -61,7 +95,10 @@ function guestCard(guest) {
         <p class="guest-name">${guest.name}</p>
         <p class="guest-plus-one">Plus-one: ${guest.plusOne}</p>
       </div>
-      <span class="status ${statusClass(guest.status)}">${guest.status}</span>
+      <div class="guest-badges">
+        <span class="diet-badge diet-${guest.diet}">${dietLabel(guest.diet)}</span>
+        <span class="status ${statusClass(guest.status)}">${guest.status}</span>
+      </div>
     </article>
   `;
 }
@@ -75,6 +112,7 @@ function renderGuests() {
   waitlistList.innerHTML = waitlist.map(guestCard).join("");
   waitlistSection.hidden = waitlist.length === 0;
   renderCapacity();
+  renderDietSummary();
 }
 
 function renderDrinks() {
@@ -100,12 +138,13 @@ function addRsvp(event) {
   const name = form.elements["guest-name"].value.trim();
   const status = form.elements["rsvp-status"].value;
   const plusOne = form.elements["plus-one"].value.trim() || "None";
+  const diet = form.elements["dietary-preference"].value;
 
   if (!name) {
     return;
   }
 
-  const guest = { name, status, plusOne };
+  const guest = { name, status, plusOne, diet };
 
   if (status === "Attending" && partySize(guest) > spotsRemaining()) {
     waitlist.push({ ...guest, status: "Waitlisted" });

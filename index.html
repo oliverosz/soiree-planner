@@ -93,8 +93,26 @@
               />
             </label>
 
+            <label>
+              <span>Dietary preference</span>
+              <select id="dietary-preference" name="dietary-preference">
+                <option value="none">None</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="gluten-free">Gluten-free</option>
+              </select>
+            </label>
+
             <button type="submit">Add RSVP</button>
           </form>
+
+          <section class="diet-summary" aria-labelledby="diet-summary-title">
+            <div class="section-heading">
+              <p class="eyebrow">Caterer count</p>
+              <h3 id="diet-summary-title">Dietary summary</h3>
+            </div>
+            <div class="diet-summary-grid" id="diet-summary" aria-live="polite"></div>
+          </section>
 
           <div class="guest-list" id="guest-list"></div>
 
