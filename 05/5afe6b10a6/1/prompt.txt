@@ -1,0 +1,6 @@
+Add dietary preferences to the Soirée Planner.
+
+The caterer finalizes the menu Thursday and needs counts per diet.
+Add a dietary field per guest (none, vegetarian, vegan, gluten-free),
+show a colored badge next to each guest, and show a summary count of
+each diet for the caterer.
